@@ -2,13 +2,10 @@ package util;
 
 import model.Region;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by duke on 04.03.2017.
@@ -16,22 +13,24 @@ import java.util.List;
 
 public class RegionUtil {
     public static final List<Region> REGIONS;
-    private static final Path REGIONS_FILE = Paths.get("web.csv");
+    private static final String REGIONS_FILE = "src/main/resources/regions.csv".replace("/", File.separator);
 
     static {
         REGIONS = RegionUtil.init();
     }
 
-    private static List<Region> init() {
+    public static List<Region> init() {
+        List<Region> tmp = new ArrayList<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader(REGIONS_FILE))) {
+            tmp = reader.lines().filter(s -> s.length() > 0).map(Region::new).collect(Collectors.toList());
 
-        try(BufferedReader reader = new BufferedReader(new FileReader(REGIONS_FILE.toFile()))) {
 
         } catch (FileNotFoundException e) {
-            System.out.println("Нету такого файла");
+            System.out.println("Нету такого файла: " + REGIONS_FILE);
         } catch (IOException e) {
             System.out.println("Чтото пошло не так");
         }
 
-        return null;
+        return tmp;
     }
 }

@@ -11,17 +11,15 @@ public class Entity {
     private String name;
     private int year;
     private int number;
-    private String partner;
     private LocalDate date;
     private Status status;
     private Region region;
 
-    public Entity(int id, String name, int year, int number, String partner, LocalDate date, Status status, Region region) {
+    public Entity(int id, String name, int year, int number, LocalDate date, Status status, Region region) {
         this.id = id;
         this.name = name;
         this.year = year;
         this.number = number;
-        this.partner = partner;
         this.date = date;
         this.status = status;
         this.region = region;
@@ -57,14 +55,6 @@ public class Entity {
 
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    public String getPartner() {
-        return partner;
-    }
-
-    public void setPartner(String partner) {
-        this.partner = partner;
     }
 
     public LocalDate getDate() {

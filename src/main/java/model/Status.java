@@ -7,13 +7,39 @@ package model;
 public enum Status {
     NEW("Новая"), ACCEPT("Принята"), REJECT("Отклонена"), APPEAL("Апелляция"), RECEIVED("Путевка получена"), REFUSE("Отказ подающего"), ISSUED("Оформлена");
 
-    private String status;
+    public String status;
 
     Status(String status) {
         this.status = status;
     }
 
-    public String getStatus() {
-        return status;
+
+    public static Status init(String s) {
+        switch (s) {
+            case "Новая":
+                return Status.NEW;
+
+            case "Принята":
+                return Status.ACCEPT;
+
+            case "Отклонена":
+                return Status.REJECT;
+
+            case "Апелляция":
+                return Status.APPEAL;
+
+            case "Путевка получена":
+                return Status.RECEIVED;
+
+            case "Отказ подающего":
+                return Status.REFUSE;
+
+            case "Оформлена":
+                return Status.ISSUED;
+
+        }
+
+        return null;
     }
+
 }
