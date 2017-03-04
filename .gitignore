@@ -5,3 +5,4 @@ target
 log
 *.patch
 /.idea/
+/ais.artek.org.iml
