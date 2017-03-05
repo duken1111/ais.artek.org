@@ -16,8 +16,11 @@ public interface EntityService {
     List<Entity> getALL();
 
     //Групирую все записи по Региону,
-    Map<Region, List<Entity>> groupeAllByRegion();
+    Map<Region, List<Entity>> groupAllByRegion();
 
     //группирую все записи по дате
-    Map<LocalDate, List<Entity>> groupeAllByDate();
+    Map<LocalDate, List<Entity>> groupAllByDate();
+
+    //Число заявок за каждый день
+    Map<LocalDate,Integer> countAllEntitiesByData();
 }
