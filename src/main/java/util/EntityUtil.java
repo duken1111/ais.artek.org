@@ -2,6 +2,7 @@ package util;
 
 import model.Entity;
 import model.Region;
+import model.Smena;
 import model.Status;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,9 +20,11 @@ import java.util.stream.Collectors;
 /**
  * Created by duke on 04.03.2017.
  */
+
+
 public class EntityUtil {
     public static final List<Entity> ENTITIES;
-    private static final String ENTITIES_FILE = "src/main/resources/database.html".replace("/", File.separator);
+    private static final String ENTITIES_FILE = "F:/data.html".replace("/", File.separator);
 
     static {
         ENTITIES = init();
@@ -54,8 +57,9 @@ public class EntityUtil {
         Region region = getRegion(tr);
         Status status = getStatus(tr);
         LocalDate date = getLocalDate(tr);
+        Smena smena = SmenaUtil.getSmenaByYearAndNumber(year,number);
 
-        return new Entity(id,name,year,number,date,status,region);
+        return new Entity(id,name,smena,date,status,region);
     }
 
     private static int getId(Element tr) {

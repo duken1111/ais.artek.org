@@ -9,17 +9,15 @@ public class Entity {
 
     private int id;
     private String name;
-    private int year;
-    private int number;
     private LocalDate date;
+    private Smena smena;
     private Status status;
     private Region region;
 
-    public Entity(int id, String name, int year, int number, LocalDate date, Status status, Region region) {
+    public Entity(int id, String name, Smena smena, LocalDate date, Status status, Region region) {
         this.id = id;
         this.name = name;
-        this.year = year;
-        this.number = number;
+        this.smena = smena;
         this.date = date;
         this.status = status;
         this.region = region;
@@ -41,20 +39,12 @@ public class Entity {
         this.name = name;
     }
 
-    public int getYear() {
-        return year;
+    public Smena getSmena() {
+        return smena;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
+    public void setSmena(Smena smena) {
+        this.smena = smena;
     }
 
     public LocalDate getDate() {
@@ -79,5 +69,14 @@ public class Entity {
 
     public void setRegion(Region region) {
         this.region = region;
+    }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "id=" + id +
+                ", date=" + date +
+                ", region=" + region +
+                '}';
     }
 }
