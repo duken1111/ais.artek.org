@@ -5,9 +5,16 @@ package model;
  */
 public class Region {
     private String name;
+    private Type type;
+
+    public Region(String name, Type type) {
+        this.name = name.toLowerCase();
+        this.type = type;
+    }
 
     public Region(String name) {
-        this.name = name.toLowerCase();
+        this.name = name;
+        this.type = Type.REGION;
     }
 
     public String getName() {
@@ -18,10 +25,19 @@ public class Region {
         this.name = name;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Region{" +
                 "name='" + name + '\'' +
+                ", type=" + type +
                 '}';
     }
 
@@ -32,12 +48,15 @@ public class Region {
 
         Region region = (Region) o;
 
-        return name != null ? name.equals(region.name) : region.name == null;
+        if (name != null ? !name.equals(region.name) : region.name != null) return false;
+        return type == region.type;
 
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
     }
 }

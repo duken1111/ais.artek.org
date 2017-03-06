@@ -84,8 +84,9 @@ public class EntityUtil {
 
     private static Region getRegion(Element tr) {
         Element td = tr.select("td").get(4);
-        Region tmp = new Region(td.text().toLowerCase());
+        Region tmp = RegionUtil.REGIONS.stream().filter(r -> r.getName().equals(td.text().toLowerCase())).findFirst().orElse(null);
         return RegionUtil.REGIONS.contains(tmp) ? tmp : null;
+
     }
 
     private static Status getStatus(Element tr) {

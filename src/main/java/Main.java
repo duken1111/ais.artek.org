@@ -1,5 +1,6 @@
 import model.Entity;
 import model.Region;
+import model.Type;
 import service.EntityService;
 import service.EntityServiceImp;
 import util.EntityUtil;
@@ -21,7 +22,6 @@ public class Main {
     public static void main(String[] args) {
         EntityService entityService = new EntityServiceImp();
 
-
         System.out.println("Регионов - " + RegionUtil.REGIONS.size());
 
         long start = new Date().getTime();
@@ -30,16 +30,7 @@ public class Main {
 
         long ends = new Date().getTime();
 
-        System.out.println("Выполнено за "+ (ends - start) + "mc");
-
-        int total = 0;
-
-        for(Map.Entry<LocalDate, List<Entity>> entry : entityService.groupAllByDate().entrySet()) {
-            total += entry.getValue().size();
-            System.out.println(entry.getKey() + ":" + entry.getValue().size());
-        }
-
-        System.out.println(total);
+        System.out.println(entityService.getALL().stream().filter(e -> e.getRegion() == null).count());
 
 
     }
