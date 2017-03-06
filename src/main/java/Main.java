@@ -6,6 +6,7 @@ import service.EntityServiceImp;
 import util.EntityUtil;
 import util.RegionUtil;
 import util.SmenaUtil;
+import util.ToFileUtil;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -31,6 +32,10 @@ public class Main {
         long ends = new Date().getTime();
 
         System.out.println(entityService.getALL().stream().filter(e -> e.getRegion() == null).count());
+
+       //ToFileUtil.createAllEntitiesByDateCount(entityService.countAllEntitiesByData());
+
+       entityService.groupAllByDate().forEach((k,v) -> System.out.println(k + " " + v));
 
 
     }

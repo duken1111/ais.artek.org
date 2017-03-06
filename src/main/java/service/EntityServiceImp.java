@@ -31,7 +31,15 @@ public class EntityServiceImp implements EntityService {
 
         Map<LocalDate,List<Entity>> tmp = allEntities.stream().collect(Collectors.groupingBy(Entity::getDate, Collectors.toList()));
 
-        return tmp;
+        SortedMap<LocalDate, List<Entity>> sortedMap = new TreeMap<>(new Comparator<LocalDate>() {
+            @Override
+            public int compare(LocalDate o1, LocalDate o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        sortedMap.putAll(tmp);
+
+        return sortedMap;
     }
 
     @Override
