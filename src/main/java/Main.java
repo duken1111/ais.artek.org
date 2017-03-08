@@ -22,21 +22,26 @@ public class Main {
 
     public static void main(String[] args) {
         EntityService entityService = new EntityServiceImp();
-
-        System.out.println("Регионов - " + RegionUtil.REGIONS.size());
-
         long start = new Date().getTime();
 
-        System.out.println("Записей - " + EntityUtil.ENTITIES.size());
+        System.out.println("Регионов и партнеров - " + RegionUtil.REGIONS.size());
+
+        System.out.println("Загруженно объектов - " + EntityUtil.ENTITIES.size());
+        System.out.println();
+        System.out.println("Объекстов без регионов: " + entityService.getALL().stream().filter(e -> e.getRegion() == null).count());
+        System.out.println("Объекстов без смены: " + entityService.getALL().stream().filter(e -> e.getSmena() == null).count());
+        System.out.println("Объекстов без статуса: " + entityService.getALL().stream().filter(e -> e.getStatus() == null).count());
+        System.out.println();
+
+
+
+
+
+        ToFileUtil.createAllEntitiesByDateCount(entityService.countAllEntitiesByData());
+
 
         long ends = new Date().getTime();
 
-        System.out.println(entityService.getALL().stream().filter(e -> e.getRegion() == null).count());
-
-       //ToFileUtil.createAllEntitiesByDateCount(entityService.countAllEntitiesByData());
-
-       entityService.groupAllByDate().forEach((k,v) -> System.out.println(k + " " + v));
-
-
+        System.out.println("Время выполнения: " + (ends-start) + " мс");
     }
 }

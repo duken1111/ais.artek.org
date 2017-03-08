@@ -59,7 +59,7 @@ public class ToFileUtil {
 
     private static void writeLine(Writer writer,String line) {
         try {
-            writer.write(line);
+            writer.write(line + "\n");
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
