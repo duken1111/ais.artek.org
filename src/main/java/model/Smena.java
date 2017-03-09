@@ -64,4 +64,27 @@ public class Smena {
                 ", quota=" + quota +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Smena smena = (Smena) o;
+
+        if (year != smena.year) return false;
+        if (number != smena.number) return false;
+        if (quota != smena.quota) return false;
+        return name != null ? name.equals(smena.name) : smena.name == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + year;
+        result = 31 * result + number;
+        result = 31 * result + quota;
+        return result;
+    }
 }

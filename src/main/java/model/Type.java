@@ -24,4 +24,23 @@ public enum  Type {
 
         return Type.REGION;
     }
+
+    public static String getName(Type type) {
+        switch (type) {
+            case REGION:
+                return "Региональный оператор";
+
+            case PARTNER:
+                return "Тематические партнеры";
+
+            case MO:
+                return "Мин.обр";
+
+            case COMMERCE:
+                return "Коммерческие";
+
+        }
+
+        return null;
+    }
 }
