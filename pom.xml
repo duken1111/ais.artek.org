@@ -30,6 +30,14 @@
         <artifactId>jsoup</artifactId>
         <version>1.7.2</version>
     </dependency>
+
+    <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-core</artifactId>
+        <version>1.11.2</version>
+    </dependency>
+
+
 </dependencies>
 
 
