@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class EntityUtil {
     public static final List<Entity> ENTITIES;
-    private static final String ENTITIES_FILE = "F:/data.html".replace("/", File.separator);
+    private static final String ENTITIES_FILE = "E:/data.html".replace("/", File.separator);
 
     static {
         ENTITIES = init();
