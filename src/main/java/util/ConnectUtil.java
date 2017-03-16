@@ -1,6 +1,7 @@
 package util;
 
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -29,6 +30,8 @@ import java.net.CookieManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.net.CookieManager.*;
+
 
 /**
  * Created by DLepeshko on 14.03.2017.
@@ -50,9 +53,8 @@ public class ConnectUtil {
         ConnectUtil conn = new ConnectUtil( );
 
         String loginPage = conn.GetPageContent(url);
-        System.out.println(conn.getCookies());
 
-        List<NameValuePair> params = conn.getFormParams(loginPage, "dlepeshko@artek.org", "lol106tt");
+        List<NameValuePair> params = conn.getFormParams(loginPage, "dlepeshko@artek.org", "lol106tt","true");
 
         conn.sendPost(url, params);
 
@@ -123,13 +125,17 @@ public class ConnectUtil {
         rd.lines().forEach(s -> result.append(s).append("\n"));
 
         // set cookies
+        for(Header header : response.getAllHeaders()) {
+            System.out.println(header.getName() + " - " + header.getValue());
+        }
+        System.out.println();
         this.setCookies(response.getFirstHeader("Set-Cookie") == null ? "" :
                 response.getFirstHeader("Set-Cookie").toString());
-
+        //System.out.println(getCookies());
         return result.toString();
     }
 
-    public List<NameValuePair> getFormParams(String html, String username, String password)throws UnsupportedEncodingException {
+    public List<NameValuePair> getFormParams(String html, String username, String password, String remember)throws UnsupportedEncodingException {
 
         System.out.println("Extracting form's data...");
 
@@ -149,6 +155,8 @@ public class ConnectUtil {
                 value = username;
             else if (key.equals("Password"))
                 value = password;
+            else if(key.equals("RememberMe"))
+                value = remember;
 
             paramList.add(new BasicNameValuePair(key, value));
 

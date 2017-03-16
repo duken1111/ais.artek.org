@@ -13,7 +13,7 @@ import java.util.List;
  * Created by duke on 06.03.2017.
  */
 public class ToFileUtil {
-    private static final String RESULT_PATH = "src/main/resources/result/".replace("/", File.separator);
+    private static final String RESULT_PATH = "E:/Java/ais.artek.org/src/main/resources/".replace("/", File.separator);
 
 
     public static void createFile(String fileName, List<String> lines) {
@@ -26,6 +26,7 @@ public class ToFileUtil {
     private static Path makeFile(String string) {
         String fullName = string + ".csv";
         Path file = Paths.get(RESULT_PATH + fullName);
+        System.out.println(file.toString());
         try {
             if(Files.exists(file)) {
                 return file;
