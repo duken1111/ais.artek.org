@@ -44,8 +44,8 @@ public class ConnectUtil {
 
 
     public static void main(String[] args) throws Exception {
-        String url = "http://ais.artek.org/AccountArtekPlus/Login";
-        String mainPage = "http://ais.artek.org/";
+        String url = "http://artek.org/admin/login/?next=/admin/";
+        String mainPage = "http://artek.org/admin/";
 
         //включаем кукисы
         CookieHandler.setDefault(new CookieManager());
@@ -54,12 +54,13 @@ public class ConnectUtil {
 
         String loginPage = conn.GetPageContent(url);
 
-        List<NameValuePair> params = conn.getFormParams(loginPage, "dlepeshko@artek.org", "lol106tt","true");
+        List<NameValuePair> params = conn.getFormParams(loginPage, "dlepeshko@artek.org", "lol106tt");
 
         conn.sendPost(url, params);
 
         String main = conn.GetPageContent(mainPage);
 
+        System.out.println(main);
 
     }
 
@@ -69,14 +70,14 @@ public class ConnectUtil {
         HttpPost post = new HttpPost(url);
 
         // add header
-        post.setHeader("Host", "ais.artek.org");
+        post.setHeader("Host", "artek.org");
         post.setHeader("User-Agent", USER_AGENT);
         post.setHeader("Accept",
                 "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         post.setHeader("Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4");
         post.setHeader("Cookie", getCookies());
         post.setHeader("Connection", "keep-alive");
-        post.setHeader("Referer", "http://ais.artek.org/AccountArtekPlus/Login");
+        post.setHeader("Referer", "http://artek.org/admin/logout/");
         post.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
         post.setEntity(new UrlEncodedFormEntity(postParams));
@@ -135,7 +136,7 @@ public class ConnectUtil {
         return result.toString();
     }
 
-    public List<NameValuePair> getFormParams(String html, String username, String password, String remember)throws UnsupportedEncodingException {
+    public List<NameValuePair> getFormParams(String html, String username, String password)throws UnsupportedEncodingException {
 
         System.out.println("Extracting form's data...");
 
@@ -151,12 +152,10 @@ public class ConnectUtil {
             String key = inputElement.attr("name");
             String value = inputElement.attr("value");
 
-            if (key.equals("Login"))
+            if (key.equals("username"))
                 value = username;
-            else if (key.equals("Password"))
+            else if (key.equals("password"))
                 value = password;
-            else if(key.equals("RememberMe"))
-                value = remember;
 
             paramList.add(new BasicNameValuePair(key, value));
 
