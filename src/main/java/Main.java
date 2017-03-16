@@ -27,7 +27,7 @@ public class Main {
         System.out.println("Объектов без смены: " + EntityUtil.ENTITIES.stream().filter(e -> e.getSmena() == null).count());
         System.out.println("Объектов без статуса: " + EntityUtil.ENTITIES.stream().filter(e -> e.getStatus() == null).count());
         System.out.println();
-
+        System.out.println();
         //ПРосто посчитать все заявки в бд и записатб в файл
         ToFileUtil.createFile("all",entityService.getALL());
 
