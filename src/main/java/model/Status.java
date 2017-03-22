@@ -5,7 +5,7 @@ package model;
  */
 
 public enum Status {
-    NEW("Новая"), ACCEPT("Принята"), REJECT("Отклонена"), APPEAL("Апелляция"), RECEIVED("Путевка получена"), REFUSE("Отказ подающего"), ISSUED("Оформлена");
+    NEW("Новая"), ACCEPT("Принята"), REJECT("Отклонена"), APPEAL("Апелляция"), RECEIVED("Путевка получена"), REFUSE("Отказ подающего"), ISSUED("Оформлена"), NONAMED("");
 
     public String status;
 
@@ -39,7 +39,7 @@ public enum Status {
 
         }
 
-        return null;
+        return NONAMED;
     }
 
 }

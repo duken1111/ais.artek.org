@@ -71,6 +71,10 @@ public class Entity {
         this.region = region;
     }
 
+    public boolean isProcessing() {
+        return this.status != Status.NEW;
+    }
+
     @Override
     public String toString() {
         return "Entity{" +
@@ -78,5 +82,21 @@ public class Entity {
                 ", date=" + date +
                 ", region=" + region +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Entity entity = (Entity) o;
+
+        return id == entity.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }

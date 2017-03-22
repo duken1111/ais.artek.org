@@ -12,16 +12,18 @@ import java.util.stream.Collectors;
  * Created by duke on 09.03.2017.
  */
 public class EntityRepositoryImp implements EntityRepository{
-    private final static List<Entity> ENTITY_LIST = EntityUtil.ENTITIES;
+    private final static Set<Entity> ENTITY_LIST = EntityUtil.ENTITIES;
 
     @Override
     public List<Entity> getALL() {
-        return ENTITY_LIST;
+        List<Entity> tmp = new ArrayList<>();
+        tmp.addAll(ENTITY_LIST);
+        return tmp;
     }
 
     @Override
     public Map<Region, List<Entity>> groupAllByRegion() {
-        return ENTITY_LIST.stream().collect(Collectors.groupingBy(Entity::getRegion, Collectors.toList()));
+        return getALL().stream().collect(Collectors.groupingBy(Entity::getRegion, Collectors.toList()));
     }
 
     @Override

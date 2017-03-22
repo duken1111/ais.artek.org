@@ -11,10 +11,14 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -23,22 +27,27 @@ import java.util.stream.Collectors;
 
 
 public class EntityUtil {
-    public static final List<Entity> ENTITIES;
-    private static final String ENTITIES_FILE = "E:/data.html".replace("/", File.separator);
+    public static final Set<Entity> ENTITIES;
+    private static final String ENTITIES_FILE = "C:/java/ais.artek.org/zayavki".replace("/", File.separator);
 
     static {
         ENTITIES = init();
     }
 
-    public static List<Entity> init() {
-        List<Entity> tmp = new ArrayList<>();
+    public static Set<Entity> init() {
+        HashSet<Entity> tmp = new HashSet<>();
 
         try {
-            Document doc = Jsoup.parse(Paths.get(ENTITIES_FILE).toFile(),"UTF-8");
 
-            Elements tr = doc.select("table tr");
+            List<Path> pathes = Files.walk(Paths.get(ENTITIES_FILE)).filter(f -> Files.isRegularFile(f)).collect(Collectors.toList());
 
-            tmp = tr.stream().map(EntityUtil::parseEntity).collect(Collectors.toList());
+            for(Path path : pathes) {
+                Document doc = Jsoup.parse(path.toFile(), "UTF-8");
+
+                Elements tr = doc.select("table tr");
+
+                tmp.addAll(tr.stream().map(EntityUtil::parseEntity).collect(Collectors.toList()));
+            }
 
 
         } catch (IOException e) {

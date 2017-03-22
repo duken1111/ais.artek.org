@@ -4,7 +4,7 @@ package model;
  * Created by duke on 06.03.2017.
  */
 public enum  Type {
-    REGION, PARTNER, MO, COMMERCE;
+    REGION, PARTNER, MO, COMMERCE, NONAMED;
 
     public static Type init(String s) {
         switch (s) {
@@ -22,7 +22,7 @@ public enum  Type {
 
         }
 
-        return Type.REGION;
+        return Type.NONAMED;
     }
 
     public static String getName(Type type) {
@@ -41,6 +41,6 @@ public enum  Type {
 
         }
 
-        return null;
+        return "";
     }
 }
