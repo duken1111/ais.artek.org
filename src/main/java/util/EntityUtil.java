@@ -66,9 +66,11 @@ public class EntityUtil {
         Region region = getRegion(tr);
         Status status = getStatus(tr);
         LocalDate date = getLocalDate(tr);
+        double rating = getCurrentRating(tr);
+        int age = getAge(tr);
         Smena smena = SmenaUtil.getSmenaByYearAndNumber(year,number);
 
-        return new Entity(id,name,smena,date,status,region);
+        return new Entity(id,name,smena,date,status,region,rating,age);
     }
 
     private static int getId(Element tr) {
@@ -107,4 +109,15 @@ public class EntityUtil {
         Element td = tr.select("td").get(6);
         return TimeUtil.getLocalDateByString(td.text());
     }
+
+    private static double getCurrentRating(Element tr) {
+        Element td = tr.select("td").get(7);
+        return Double.parseDouble(td.text().replace(",",".").replaceAll("\\u00A0",""));
+    }
+
+    private static int getAge(Element tr) {
+        Element td = tr.select("td").get(8);
+        return Integer.parseInt(td.text());
+    }
+
 }

@@ -16,4 +16,6 @@ public interface RegionRepository {
     List<Region> getAllByRegion(Type type);
 
     Region get(Region region);
+
+    Region getByName(String name);
 }

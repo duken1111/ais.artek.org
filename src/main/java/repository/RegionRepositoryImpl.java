@@ -28,4 +28,9 @@ public class RegionRepositoryImpl implements RegionRepository {
     public Region get(Region region) {
         return regions.stream().filter(r -> r.equals(region)).findFirst().orElse(null);
     }
+
+    @Override
+    public Region getByName(String name) {
+        return regions.stream().filter(r -> r.equals(new Region(name))).findFirst().orElse(null);
+    }
 }
