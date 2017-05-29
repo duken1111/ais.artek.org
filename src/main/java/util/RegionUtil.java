@@ -52,7 +52,7 @@ public class RegionUtil {
 
     private static String getName(Element tr) {
         Element td = tr.select("td").get(0);
-        return td.text().toLowerCase();
+        return td.text();
     }
 
     private static Type getType(Element tr) {

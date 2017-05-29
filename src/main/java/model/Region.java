@@ -48,7 +48,7 @@ public class Region {
 
         Region region = (Region) o;
 
-        if (name != null ? !name.equals(region.name) : region.name != null) return false;
+        if (name != null ? !name.equalsIgnoreCase(region.name) : region.name != null) return false;
         return type == region.type;
 
     }

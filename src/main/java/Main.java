@@ -1,19 +1,18 @@
 
 import model.Entity;
-import model.Region;
 import model.Status;
-import model.Type;
 import repository.EntityRepository;
 import repository.EntityRepositoryImp;
 
 import repository.RegionRepository;
 import repository.RegionRepositoryImpl;
-import util.*;
-
+import util.StatisticUtil;
+import util.ToFileUtil;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 /**
  * Created by duke on 04.03.2017.
@@ -32,7 +31,10 @@ public class Main {
         System.out.println("Объектов без смены: " + entityRepository.getALL().stream().filter(e-> e.getSmena() == null).count());
         System.out.println("Объектов без статуса: " + entityRepository.getALL().stream().filter(e -> e.getStatus() == Status.NONAMED).count());
 
-        System.out.println("Макситмальный рейтинг: " + entityRepository.getALL().stream().max((o1, o2) -> o1.getAge() - o2.getAge()).get().getAge());
+        System.out.println("Максимальный возраст: " + entityRepository.getALL().stream().max((o1, o2) -> o1.getAge() - o2.getAge()).get().getAge());
+
+        List<Entity> noNull = entityRepository.getALL().stream().filter(e -> e.getRegion()!= null).collect(Collectors.toList());
+        //entityRepository.getALL().stream().filter(e -> e.getRegion() == null).forEach(System.out::println);
 
         //Обычная статистика в 1 файл
         //ToFileUtil.createSimpleFile("common", StatisticUtil.createCommonStatisticLines(entityRepository.getALL()));
@@ -40,9 +42,9 @@ public class Main {
         //Тестовый фильтр
         // List<Entity> tmp = entityRepository.getALL().stream().filter(e -> e.getRegion() == regionRepository.getByName("воронежская область")).collect(Collectors.toList());
 
-        //ToFileUtil.createSimpleFile("2017", StatisticUtil.createStatisticByYearWithParams(entityRepository.getALL(),2017));
+         ToFileUtil.createSimpleFile("2017", StatisticUtil.createStatisticByYearWithParams(noNull, 2017));
 
-        ToFileUtil.createSimpleFile("smena",StatisticUtil.createStatisticBySmena(entityRepository.getALL()));
+        //ToFileUtil.createSimpleFile("smena",StatisticUtil.createStatisticBySmena(entityRepository.getALL()));
 
 
         long end = new Date().getTime();
